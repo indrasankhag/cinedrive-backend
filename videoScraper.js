@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const axios = require('axios');
 require('dotenv').config();
 
@@ -54,6 +54,7 @@ async function scrapeWithNetworkInterception(facebookPostId) {
 
         browser = await puppeteer.launch({
             headless: 'new',
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
