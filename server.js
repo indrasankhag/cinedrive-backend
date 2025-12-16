@@ -10,9 +10,7 @@ const PORT = process.env.PORT || 3000;
 const rateLimiter = {
     requests: new Map(), // Map<IP, {count, resetTime}>
     maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 10,
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 60
-
-000,
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 60000,
 
     check: function (ip) {
         const now = Date.now();
