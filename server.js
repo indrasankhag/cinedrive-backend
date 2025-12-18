@@ -84,8 +84,13 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting middleware
+// Rate limiting middleware (skip health check)
 app.use((req, res, next) => {
+    // Skip rate limiting for health check endpoint
+    if (req.path === '/api/health') {
+        return next();
+    }
+
     const ip = req.ip || req.connection.remoteAddress;
     const result = rateLimiter.check(ip);
 
